@@ -1,10 +1,11 @@
 <p align="center">
 <h2>fingerprintjs</h2>
 <br/>
-##This is a fork of the original [Valve's fingerprintjs](https://github.com/Valve/fingerprintjs) project.
 <a href="https://travis-ci.org/Valve/fingerprintjs"><img src="http://img.shields.io/travis/Valve/fingerprintjs/master.svg?style=flat" /></a>
 <a href="https://gitter.im/Valve/fingerprintjs"><img src="https://badges.gitter.im/Valve/fingerprintjs.png"/></a>
 </p>
+
+This is a fork of the original [Valve's fingerprintjs](https://github.com/Valve/fingerprintjs) project.
 
 Fast browser fingerprint library. Written in pure JavaScript, no dependencies. 
 By default uses [Murmur hashing][murmur] and returns a 32bit integer number.
