@@ -2,9 +2,8 @@
 /*global module, define, ActiveXObject*/
 
 /*
-* fingerprintJS 0.5.3 - Fast browser fingerprint library
-* https://github.com/Valve/fingerprintjs
-* Copyright (c) 2013 Valentin Vasilyev (valentin.vasilyev@outlook.com)
+* fingerprintJS 0.5.4 - Fast browser fingerprint library
+* https://github.com/georapbox/fingerprintjs
 * Licensed under the MIT (http://www.opensource.org/licenses/mit-license.php) license.
 *
 * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
