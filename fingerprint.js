@@ -1,22 +1,22 @@
 /*jshint curly: true, eqeqeq: true, forin: true, freeze: true, immed: true, latedef: nofunc, newcap: true, noarg: true, noempty: true, nonew: true, quotmark: single, unused: strict, strict: true, browser: true, devel: true, indent: 4*/
 /*global module, define, ActiveXObject*/
 
-/*
-* fingerprintJS 0.5.4 - Fast browser fingerprint library
-* https://github.com/georapbox/fingerprintjs
-* Licensed under the MIT (http://www.opensource.org/licenses/mit-license.php) license.
-*
-* THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-* AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-* IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-* ARE DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> BE LIABLE FOR ANY
-* DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
-* (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
-* LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
-* ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-* (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
-* THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*/
+/**
+ * fingerprintJS 0.5.4 - Fast browser fingerprint library
+ * https://github.com/georapbox/fingerprintjs
+ * Licensed under the MIT (http://www.opensource.org/licenses/mit-license.php) license.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> BE LIABLE FOR ANY
+ * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
+ * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
 
 (function (name, context, definition) {
     'use strict';
@@ -141,6 +141,16 @@
 
 		set: function () {
 			var resolution;
+            
+            // Reset all keys
+            this.keys = [];
+            this.navKeys = [];
+            this.screenKeys = [];
+            this.dbKeys = [];
+            this.pluginsKeys = [];
+            this.canvasKeys = [];
+            this.webglKeys = [];
+            this.uncategorisedKeys = [];
 
 			// NAVIGATOR KEYS
 			this.navKeys.push(navigator.userAgent);                               // 0. {String} navigator.userAgent.
@@ -454,6 +464,7 @@
 			return canvas.toDataURL();
 		},
         
+        // https://www.browserleaks.com/webgl#howto-webgl-ident
         getWebGlFingerptint: function () {
             var context = this.isWebGlSupported(true),
                 webglFingerprint = '';

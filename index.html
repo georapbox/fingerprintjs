@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>fingerprintjs | Anonymous browser fingerprint</title>
+    <style>
+        body { margin: 0; font-family: Arial, Helvetica, sans-serif; font-size: 14px; border-top: 5px solid #3f8fd3; }
+        #main { margin: 0 25px; }
+        #footer { padding: 10px 0 15px 0; }
+        #footer p { color: #777; }
+        a { color: #3f8fd3; text-decoration: none; }
+        a:hover { color: #3f8fd3; text-decoration: underline; }
+        h1 { margin-bottom: 0; padding-bottom: 5px; font-size: 40px; font-weight: normal; letter-spacing: -0.01em; }
+        h2 { font-size: 22px; font-weight: normal; }
+        h1 span { color: #3f8fd3; }
+        h2.subhead { margin: 0; padding: 0; font-size: 18px; }
+        .no-margin { margin: 0; }
+        .red { color: #b41010; }
+        .green { color: #165c16; }
+        .orange { color: #be5818; }
+        .blue { color: #2c73af; }
+        .magenta { color: #961c96; }
+        .grey { color: #535353; }
+        pre {
+            overflow: auto;
+            display: block;
+            padding: 9.5px;
+            margin: 0 0 10px;
+            font-size: 13px;
+            line-height: 1.42857143;
+            color: #333;
+            word-break: break-all;
+            word-wrap: break-word;
+            background-color: #f5f5f5;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            white-space: pre-wrap;
+            white-space: -moz-pre-wrap;
+            white-space: -pre-wrap;
+            white-space: -o-pre-wrap;
+            word-wrap: break-word;
+        }
+        pre code {
+            padding: 0;
+            font-size: inherit;
+            color: inherit;
+            white-space: pre-wrap;
+            background-color: transparent;
+            border-radius: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="main">
+        <h1>fingerprint<span>js</span></h1>
+        <h2 class="subhead">Anonymous browser fingerprint with <span style="color:#3f8fd3; font-size:24px;">&hearts;</span></h2>
+        <p class="no-margin"><a href="https://github.com/georapbox/fingerprintjs" target="_blank">[https://github.com/georapbox/fingerprintjs]</a></p> 
+
+        <h2>Browser Fingerprints:</h2>
+        <h3>default + optional settings</h3>
+        <ul>
+            <li>Your browser fingerprint with <span class="red">default settings</span> (canvas, WebGL screen, resolution, activeX disabled): <span id="fp1" class="red"></span></li>
+            <li>Your browser fingerprint with default settings and <span class="green">activeX</span> enabled: <span id="fp2" class="green"></span></li>
+            <li>Your browser fingerprint with default settings and <span class="orange">canvas</span> enabled: <span id="fp3" class="orange"></span></li>
+            <li>Your browser fingerprint with default settings and <span class="blue">WebGL</span> enabled: <span id="fp4" class="blue"></span></li>
+            <li>Your browser fingerprint with default settings and <span class="magenta">screen resolution</span> enabled: <span id="fp5" class="magenta"></span></li>
+            <li>Your browser fingerprint with both <strong>default and all optional settings</strong> enabled: <strong><span id="fp6"></span></strong> (with custom hasher: <span id="fp6_ch"></span>)</li>
+        </ul>
+
+        <h3>Only with specific keys</h3>
+        <ul>
+            <li>Your browser fingerprint only with <span class="grey">"navigator"</span> keys: <span id="fp7" class="grey"></span></li>
+            <li>Your browser fingerprint only with <span class="grey">"screen"</span> keys: <span id="fp8" class="grey"></span></li>
+            <li>Your browser fingerprint only with <span class="grey">"db"</span> keys: <span id="fp9" class="grey"></span></li>
+            <li>Your browser fingerprint only with <span class="grey">"plugins"</span> keys: <span id="fp10" class="grey"></span></li>
+            <li>Your browser fingerprint only with <span class="grey">"canvas"</span> keys: <span id="fp11" class="grey"></span></li>
+            <li>Your browser fingerprint only with <span class="grey">"webgl"</span> keys: <span id="fp12" class="grey"></span></li>
+            <li>Your browser fingerprint only with <span class="grey">"uncategorised"</span> keys: <span id="fp13" class="grey"></span></li>
+        </ul>
+
+        <h2>Stored keys with all settings enabled:</h2>
+        <pre><ol id="fp6_array"></ol></pre>
+        
+        <div id="footer">
+            <p>
+               Published under <a href="http://www.opensource.org/licenses/mit-license.php" target="_blank">MIT License</a>,<br/>
+                fingerprintjs is a fork of the original <a href="https://github.com/Valve/fingerprintjs" target="_blank">Valve's fingerprintjs</a> project.</p>
+        </div>
+    </div>
+    
+    <script src="fingerprint.js"></script>
+    <script>
+        var	fp1 = new Fingerprint().set();
+        var fp1_hash = fp1.generateHash(fp1.get());
+        document.getElementById('fp1').innerHTML = fp1_hash;
+        
+        var fp2 = new Fingerprint({
+            ieActivex: true
+        }).set();
+        var fp2_hash = fp2.generateHash(fp2.get());
+        document.getElementById('fp2').innerHTML = fp2_hash;
+        
+        var fp3 = new Fingerprint({
+            canvas: true
+        }).set();
+        var fp3_hash = fp3.generateHash(fp3.get());
+        document.getElementById('fp3').innerHTML = fp3_hash;
+        
+        var fp4 = new Fingerprint({
+            webgl: true
+        }).set();
+        var fp4_hash = fp4.generateHash(fp4.get());
+        document.getElementById('fp4').innerHTML = fp4_hash;
+        
+        var fp5 = new Fingerprint({
+            screenResolution: true
+        }).set();
+        var fp5_hash = fp5.generateHash(fp5.get());
+        document.getElementById('fp5').innerHTML = fp5_hash;
+        
+        var fp6 = new Fingerprint({
+            canvas: true,
+            webgl: true,
+            screenResolution: true,
+            ieActivex: true
+        }).set();
+        var fp6_hash = fp6.generateHash(fp6.get());
+        document.getElementById('fp6').innerHTML = fp6_hash;
+        
+        var fp6_ch = new Fingerprint({
+            canvas: true,
+            webgl: true,
+            screenResolution: true,
+            ieActivex: true,
+            hasher: function (value, seed) {
+                'use strict';
+                return value.length % seed;
+            }
+        }).set();
+        var fp6_custom_hash = fp6_ch.generateHash(fp6_ch.get());
+        document.getElementById('fp6_ch').innerHTML = fp6_custom_hash;
+        
+        var df = document.createDocumentFragment();
+        for (var i = 0; i < fp6.get().length; i++) {
+            var li = document.createElement('li');
+            li.innerHTML = fp6.get()[i];
+            df.appendChild(li);
+        }
+        document.getElementById('fp6_array').appendChild(df);
+        
+        // navigator keys
+        var fp7_hash = fp6.generateHash(fp6.get(['navigator']));
+        document.getElementById('fp7').innerHTML = fp7_hash;
+        
+        // screen keys
+        var fp8_hash = fp6.generateHash(fp6.get(['screen']));
+        document.getElementById('fp8').innerHTML = fp8_hash;
+        
+        // db keys
+        var fp9_hash = fp6.generateHash(fp6.get(['db']));
+        document.getElementById('fp9').innerHTML = fp9_hash;
+        
+        // plugins keys
+        var fp10_hash = fp6.generateHash(fp6.get(['plugins']));
+        document.getElementById('fp10').innerHTML = fp10_hash;
+        
+        // canvas keys
+        var fp11_hash = fp6.generateHash(fp6.get(['canvas']));
+        document.getElementById('fp11').innerHTML = fp11_hash;
+        
+        // webgl keys
+        var fp12_hash = fp6.generateHash(fp6.get(['webgl']));
+        document.getElementById('fp12').innerHTML = fp12_hash;
+        
+        // uncategorised keys
+        var fp13_hash = fp6.generateHash(fp6.get(['uncategorised']));
+        document.getElementById('fp13').innerHTML = fp13_hash;
+    </script>
+</body>
+</html>
