@@ -431,7 +431,7 @@
 					try {
                         // Assign Constructor function to an unused variable to avoid "side effects".
 						// http://www.jshint.com/docs/options/#nonew
-                        var activeXObj = new ActiveXObject(name);
+                        var activeXObj = new ActiveXObject(name); // jshint ignore: line
 						return name;
 					} catch (e) {
 						return null; // If ActiveXObject is not supported.
@@ -471,18 +471,13 @@
 
             if (context) {
                 var gl = context.gl,
-
-                    // Getting WebGL Context Name:
-                    webglContextName = context.name,
-                    // Getting WebGL identifiers:
-                    webglVersion = gl.getParameter(gl.VERSION),
-                    webglShadingLanguageVersion = gl.getParameter(gl.SHADING_LANGUAGE_VERSION),
-                    webglVendor = gl.getParameter(gl.VENDOR),
-                    webglRenderer = gl.getParameter(gl.RENDERER),
-                    // Setting WebGL extensions list:
-                    webglExtensionsList = '',
-                    // Setting Max Anisotropy:
-                    webglMaxAnisotropy;
+                    webglContextName = context.name,                                               // WebGL Context Name
+                    webglVersion = gl.getParameter(gl.VERSION),                                    // WebGL Version
+                    webglShadingLanguageVersion = gl.getParameter(gl.SHADING_LANGUAGE_VERSION),    // WebGL Language Version
+                    webglVendor = gl.getParameter(gl.VENDOR),                                      // WebGL Vendor
+                    webglRenderer = gl.getParameter(gl.RENDERER),                                  // WebGL Renderer
+                    webglExtensionsList = '',                                                      // WebGL extensions list
+                    webglMaxAnisotropy;                                                            // WebGL Max Anisotropy
 
                 // full list of exportable WebGL variables can be found here:
                 // https://www.khronos.org/registry/webgl/specs/1.0/#WEBGLRENDERINGCONTEXT

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fingerprint test</title>
+    <style>
+        body { font-family: Arial, Helvetica, sans-serif; font-size: 14px; }
+        .block { padding: 15px; background: #f5f5f5; border: 1px solid #d4d4d4; }
+    </style>
+</head>
+<body>
+    <h1>Fingerprintjs test</h1>
+    <ul>
+        <li>Generate browser fingerprint.</li>
+        <li>Save it to "localStorage" if first time visitor.</li>
+        <li>Compare the generated hash with the stored one in localStorage in next visits.</li>
+        <li>Notify user when the stored hash is not the same with the generated one (Hash has changed).</li>
+    </ul>
+    <p class="block">Your browser fingerprint: <span id="fp"></span></p>
+    <div id="new_fp"></div>
+    
+    <script src="../src/fingerprint.js"></script>
+    <script>
+        var fp = new Fingerprint({
+            canvas: true,
+            webgl: true,
+            screenResolution: true,
+            ieActivex: true
+        }).set();
+        
+        var fp_hash = fp.generateHash(fp.get());
+        
+        
+        if (!!window.localStorage) {
+            // if localStorage is not set.
+            if (localStorage.getItem('fingerprint_hash') === null) {
+                localStorage.setItem('fingerprint_hash', fp_hash);
+                document.getElementById('fp').innerHTML = fp_hash;
+            }
+            
+            // if localStorage item is set and is the same as the generated hash
+            if (parseInt(localStorage.getItem('fingerprint_hash'), 10) === fp_hash && localStorage.getItem('fingerprint_hash') !== null) {
+                document.getElementById('fp').innerHTML = fp_hash;
+            }
+            
+            // if localStorage item is set but is not the same as the generated hash
+            if (parseInt(localStorage.getItem('fingerprint_hash'), 10) !== fp_hash && localStorage.getItem('fingerprint_hash') !== null) {
+                document.getElementById('fp').innerHTML = localStorage.getItem('fingerprint_hash');
+                localStorage.setItem('fingerprint_hash', fp_hash);
+                document.getElementById('new_fp').innerHTML = '<p class="block">Your browser <strong>new fingerprint</strong>: <span style="color:red;">' + fp_hash + '</span></p>';
+                alert('Your browser fingerprint has changed. Your new fingerprint is now: ' + fp_hash);
+            }
+        } else {
+            alert('This page requires "localStorage" to work and your legacy browser does not support it.');
+        }
+    </script>
+</body>
+</html>
